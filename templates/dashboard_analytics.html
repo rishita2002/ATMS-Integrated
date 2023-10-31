@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Analytics Dashboard</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f2f2f2;
+                margin: 0;
+                padding: 0;
+            }
+    
+            .container {
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                border-radius: 5px;
+                margin-top: 30px;
+            }
+    
+            h1 {
+                text-align: center;
+                font-size: 24px;
+                margin-bottom: 20px;
+                color: rgb(6, 106, 106);
+            }
+    
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+    
+            .visualization {
+                text-align: center;
+                margin-bottom: 20px;
+                padding: 20px;
+                background-color: #ffffff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                border-radius: 5px;
+            }
+    
+            .visualization h2 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+    
+            .visualization img {
+                max-width: 100%;
+            }
+    
+            .form-container {
+                display: grid;
+                grid-template-columns: repeat(9, 1fr);
+                gap: 15px;
+            }
+    
+            .form-field {
+                padding: 10px;
+                background-color: #ffffff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                border-radius: 2px;
+                align-items: center;
+                
+            }
+    
+            .form-field label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+    
+            .form-field input {
+                width: 100%;
+                padding: 5px;
+                border: 1px solid #ccc;
+                border-radius: 1px;
+                align-items: center;
+            }
+    
+            .submit-button {
+                grid-column: span 9;
+                text-align: center;
+            }
+        </style>
+    </head>
+<body>
+    <br>
+    <br>
+    <form action="/upload" method="post">
+    <div class="form-container">
+        <h1>Upload New Data:</h1>
+        <div class="form-field">
+            <label for="product-name">Product Name:</label>
+            <input type="text" name="product-name" id="product-name">
+        </div>
+        <div class="form-field">
+            <label for="product-type">Product Type:</label>
+            <input type="text" name="product-type" id="product-type">
+        </div>
+        <div class="form-field">
+            <label for="origin-location">Origin Location:</label>
+            <input type="text" name="origin-location" id="origin-location">
+        </div>
+        <div class="form-field">
+            <label for="destination-location">Destination Location:</label>
+            <input type="text" name="destination-location" id="destination-location">
+        </div>
+        <div class="form-field">
+            <label for="transportation-mode">Transportation Mode:</label>
+            <input type="text" name="transportation-mode" id="transportation-mode">
+        </div>
+        <div class="form-field">
+            <label for="departure-date">Departure Date:</label>
+            <input type="text" name="departure-date" id="departure-date">
+        </div>
+        <div class="form-field">
+            <label for="arrival-date">Arrival Date:</label>
+            <input type="text" name="arrival-date" id="arrival-date">
+        </div>
+        <div class="form-field">
+            <label for="distance">Distance (in miles):</label>
+            <input type="text" name="distance" id="distance">
+        </div>
+        <div class="form-field">
+            <label for="fuel-consumption">Fuel Consumption (in gallons):</label>
+            <input type="text" name="fuel-consumption" id="fuel-consumption">
+        </div>
+        <div class="form-field">
+            <label for="co2-emissions">CO2 Emissions (in kg):</label>
+            <input type="text" name="co2-emissions" id="co2-emissions">
+        </div>
+        <div class="form-field">
+            <label for="transport-cost">Transport Cost (in dollars):</label>
+            <input type="text" name="transport-cost" id="transport-cost">
+        </div>
+        <div class="form-field">
+            <label for="compliance-status">Compliance Status:</label>
+            <input type="text" name="compliance-status" id="compliance-status">
+        </div>
+        <div class="form-field">
+            <label for="maintenance-status">Maintenance Status:</label>
+            <input type="text" name="maintenance-status" id="maintenance-status">
+        </div>
+        <div class="form-field">
+            <label for="weather-conditions">Weather Conditions:</label>
+            <input type="text" name="weather-conditions" id="weather-conditions">
+        </div>
+        <div class="form-field">
+            <label for="route-details">Route Optimization Details:</label>
+            <input type="text" name="route-details" id="route-details">
+        </div>
+        <div class="form-field">
+            <label for="quantity">Quantity:</label>
+            <input type="text" name="quantity" id="quantity">
+        </div>
+        <div class="form-field">
+            <label for="revenue">Revenue:</label>
+            <input type="text" name="revenue" id="revenue">
+        </div>
+        <div class="form-field">
+            <label for="temperature">Temperature:</label>
+            <input type="text" name="temperature" id="temperature">
+        </div>
+        <div class="form-field">
+            <label for="humidity">Humidity:</label>
+            <input type="text" name="humidity" id="humidity">
+        </div>
+        <div class="form-field">
+            <label for="soil-moisture">Soil Moisture:</label>
+            <input type="text" name="soil-moisture" id="soil-moisture">
+        </div>
+        <div class="form-field">
+            <label for="pest-incidents">Pest Incidents:</label>
+            <input type="text" name="pest-incidents" id="pest-incidents">
+        </div>
+        <div class="form-field">
+            <label for="transportation-mode-2">Transportation Mode (2):</label>
+            <input type="text" name="transportation-mode-2" id="transportation-mode-2">
+        </div>
+        <div class="form-field">
+            <label for="distance-traveled">Distance Traveled:</label>
+            <input type="text" name="distance-traveled" id="distance-traveled">
+        </div>
+        <div class="form-field">
+            <label for="date">Date:</label>
+            <input type="text" name="date" id="date">
+        </div>
+        <div class="form-field">
+            <label for="quarter">Quarter:</label>
+            <input type="text" name="quarter" id="quarter">
+        </div>
+        <div class="form-field">
+            <label for="year">Year:</label>
+            <input type="text" name="year" id="year">
+        </div>
+        <div class="submit-button">
+            <input type="submit" value="Upload Data">
+        </div>
+    </div>
+    </form>
+    <div class="container">
+        <h1>Visualization Dashboard</h1>
+
+        <div class="grid">
+            <div class="visualization">
+                <h2>Bar chart for Total Quantity by Product Type</h2>
+                <img src="data:image/png;base64, {{ plot_url1 }}" alt="Visualization 1">
+            </div>
+
+            <div class="visualization">
+                <h2>Scatter plot for Temperature vs. Humidity</h2>
+                <img src="data:image/png;base64, {{ plot_url2 }}" alt="Visualization 2">
+            </div>
+
+            <div class="visualization">
+                <h2>Pie chart for Compliance Status</h2>
+                <img src="data:image/png;base64, {{ plot_url3 }}" alt="Visualization 3">
+            </div>
+
+            <div class="visualization">
+                <h2>Line chart for Quantity over Time</h2>
+                <img src="data:image/png;base64, {{ plot_url4 }}" alt="Visualization 4">
+            </div>
+
+            <div class="visualization">
+                <h2>Box plot for CO2 Emissions</h2>
+                <img src="data:image/png;base64, {{ plot_url5 }}" alt="Visualization 5">
+            </div>
+
+            <div class="visualization">
+                <h2>Histogram for Distance Traveled</h2>
+                <img src="data:image/png;base64, {{ plot_url6 }}" alt="Visualization 6">
+            </div>
+
+            <div class="visualization">
+                <h2>Correlation Heatmap</h2>
+                <img src="data:image/png;base64, {{ plot_url7 }}" alt="Visualization 7">
+            </div>
+
+            <div class="visualization">
+                <h2>Time Series of Revenue</h2>
+                <img src="data:image.png;base64, {{ plot_url8 }}" alt="Visualization 8">
+            </div>
+
+            <div class="visualization">
+                <h2>Bar chart for Quantity by Weather Conditions</h2>
+                <img src="data:image/png;base64, {{ plot_url9 }}" alt="Visualization 9">
+            </div>
+
+            <div class="visualization">
+                <h2>Box plot for Transport Cost by Transportation Mode</h2>
+                <img src="data:image/png;base64, {{ plot_url10 }}" alt="Visualization 10">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimized Route Finder</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 10px 10px; /* Reduced margin */
+            padding: 10px;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column; /* Set flex direction to column */
+            align-items: center; /* Center content horizontally */
+        }
+
+        h2 {
+            color: #333;
+            width: 100%;
+            text-align: center; /* Center the heading */
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .left-container {
+            flex-grow: 1;
+            width: 50%; /* Adjust the width of the left container */
+            display: flex;
+            flex-direction: column;
+            margin-right: 20px; /* Add margin for spacing */
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            margin-bottom: 20px; /* Add margin for spacing */
+        }
+
+        .routes {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            flex-grow: 1;
+            overflow-y: auto; /* Enable vertical scroll if content exceeds container height */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .routes-info {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .route-info {
+            margin-bottom: 20px;
+        }
+
+        .arrow {
+            margin-left: 15px;
+            color: #333;
+        }
+
+        .route-steps {
+            width: 100%;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .right-container {
+            width: 50%; /* Adjust the width of the right container */
+        }
+
+        iframe {
+            width: 100%;
+            height: 100vh; /* Adjust the height of the map */
+            border: 0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    
+    <h2>Optimized Routes</h2>
+    <div class="container">
+        <div class="left-container">
+            <form method="post">
+                <label for="start_node">Select Start City:</label>
+                <select name="start_node" id="start_node" required>
+                    <option value="" disabled selected>Select City</option>
+                    {% for city in cities %}
+                        <option value="{{ city }}">{{ city }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <label for="end_node">Select Destination City:</label>
+                <select name="end_node" id="end_node" required>
+                    <option value="" disabled selected>Select City</option>
+                    {% for city in cities %}
+                        <option value="{{ city }}">{{ city }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <button type="submit">Find Optimized Route</button>
+            </form>
+
+            <div class="routes">
+                {% if path and distance %}
+                    <div class="routes-info">
+                        <div class="route-info">
+                            <h4>Optimized Route:</h4>
+                            <p>Start: {{ start }}</p>
+                            <p>End: {{ end }}</p>
+                            <p>Distance: {{ distance }} km</p>
+                        </div>
+                        <div class="route-steps">
+                            <h4>Step-by-Step Route:</h4>
+                            <ul>
+                                {% for step in path %}
+                                    <li>{{ step }} {% if not loop.last %}<br><span class="arrow">↓</span>{% endif %}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="right-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3815633.636477028!2d82.319989!3d20.944292200000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a261f16c67a8bad%3A0x5c23f412fb179d95!2sChhattisgarh!5e0!3m2!1sen!2sin!4v1698467027288!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</body>
+</html>

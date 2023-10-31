@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Track Product</title>
+    <style>
+        .button {
+            display: block;
+            width: 115px;
+            height: 25px;
+            background:grey;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            line-height: 25px;
+            margin-left: 50px;
+        }
+        h1{
+            text-align: center;
+            margin-top: 100px;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f7f7f7;
+        }
+        .exam{
+            margin-top: 100px;
+            margin-left: 630px;
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><u>Track Product Status</u></h1>
+        <form method="post">
+            <div class="exam">
+                <label for="product_id">Product ID:</label>
+                <input type="text" id="product_id" name="product_id" required>
+                <br><br><br>
+                <a class="button" href="/status">Track Status</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

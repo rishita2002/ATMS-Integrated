@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Supply Chain Tracking</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1> Order Tracking</h1>
+    <div class="container my-4">
+        <form method="POST" action="/send_email">
+            <div class="steps">
+                <div class="step">
+                    <div class="step-text">1. Order Confirmed</div>
+                    <input type="checkbox" name="status" value="Order Confirmed">
+                </div>
+                <br><br>
+                <div class="step">
+                    <div class="step-text">2. Shipped</div>
+                    <input type="checkbox" name="status" value="Shipped">
+                </div>
+                <br><br>
+                <div class="step">
+                    <div class="step-text">3. Out for Delivery</div>
+                    <input type="checkbox" name="status" value="Out for Delivery">
+                </div>
+                <br><br>
+                <div class="step">
+                    <div class="step-text">4. Delivered</div>
+                    <input type="checkbox" name="status" value="Delivered">
+                </div>
+            </div>
+        </form>
+        <div class="order-details">
+            <h2>Order Details</h2>
+            <p>Order ID: 123456</p>
+            <p>Delivery Address: 123 Main St, City</p>
+            <p>Estimated Delivery Date: October 30, 2023</p>
+        </div>
+    </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener("change", function () {
+                if (this.checked) {
+                    const status = this.value;
+                    sendStatusToServer(status);
+                }
+            });
+        });
+
+        function sendStatusToServer(status) {
+            // Send an HTTP request to your server with the selected status
+            fetch("/send_email", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ status: status })
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data); // Display the server's response (for testing purposes)
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        }
+    </script>
+</body>
+</html>
