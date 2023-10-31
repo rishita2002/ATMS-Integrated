@@ -1,0 +1,42 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f7f7f7;
+}
+h1{
+    text-align: center;
+}
+.container {
+    background-color: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.steps {
+    margin-top: 20px;
+    margin-left: 280px;
+    text-align: center;
+}
+.step{
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 40%;
+}
+
+.step-text {
+    font-weight: bold;
+    color: black;
+}
+
+.status-text {
+    font-weight: bold;
+}
+
+/* Order details section */
+.order-details {
+    margin-top: 40px;
+}
