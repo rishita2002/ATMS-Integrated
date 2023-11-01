@@ -1,0 +1,130 @@
+<!-- pool.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pooling Transportation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: hsl(0, 0%, 100%);
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .form-container {
+            flex: 1;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .result-container {
+            flex: 1;
+            background-color: lightblue;
+            padding: 20px;
+            border-radius: 0 5px 5px 0;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: lightblue;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        p {
+            margin-top: 20px;
+            color: #3c763d;
+        }
+        header {
+            background-color: #26648e;
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="icon">
+                <img src="static\atms_img.jpg" alt="Icon" width="125" height="100">
+            </div>
+            <h1>Advanced Transportation and Management System</h1>
+        </div>
+    </header>
+    <h1 style="color: #26648e;">Pooling Transportation</h1>
+
+    <div class="container">
+        <div class="form-container">
+            <form action="/pool" method="post">
+                <label for="start_node">Start City:</label>
+                <select name="start_node" id="start_node" required>
+                    {% for city in cities %}
+                        <option value="{{ city }}">{{ city }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="end_node">End City:</label>
+                <select name="end_node" id="end_node" required>
+                    {% for city in cities %}
+                        <option value="{{ city }}">{{ city }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="departure_time">Departure Time:</label>
+                <input type="time" name="departure_time" id="departure_time" required>
+
+                <input type="submit" value="Check Pooling">
+            </form>
+        </div>
+
+        <div class="result-container">
+            {% if result %}
+            <p>
+                {{ result|safe }}
+            </p>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>
