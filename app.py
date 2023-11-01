@@ -7,6 +7,7 @@ import sqlite3
 import os
 import csv
 from flask_mail import Mail, Message
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
@@ -433,6 +434,75 @@ def send_email():
             return "Invalid status data", 400
     except Exception as e:
         return str(e), 500
+    
+#Pooling
+current_running_trucks = [ 
+    {'start': 'Raipur', 'end': 'Bilaspur', 'departure_time': '08:00', 'driver': 'Amit', 'truck_number': 'CG 04 7158'},
+{'start': 'Durg', 'end': 'Korba', 'departure_time': '10:00', 'driver': 'Rajat', 'truck_number': 'CG 04 6404'},
+{'start': 'Bilaspur', 'end': 'Jagdalpur', 'departure_time': '11:30', 'driver': 'Chetan', 'truck_number': 'CG 04 9596'},
+{'start': 'Ambikapur', 'end': 'Rajnandgaon', 'departure_time': '13:15', 'driver': 'Sourabh', 'truck_number': 'CG 04 8115'},
+{'start': 'Korba', 'end': 'Dhamtari', 'departure_time': '15:00', 'driver': 'Vyapak', 'truck_number': 'CG 04 7516'},
+{'start': 'Janjgir', 'end': 'Mahasamund', 'departure_time': '16:45', 'driver': 'Arjun', 'truck_number': 'CG 04 4561'},
+{'start': 'Balod', 'end': 'Bhatapara', 'departure_time': '18:30', 'driver': 'Vansh', 'truck_number': 'CG 04 5067'},
+{'start': 'Mungeli', 'end': 'Kanker', 'departure_time': '20:15', 'driver': 'Amit', 'truck_number': 'CG 04 1095'},
+{'start': 'Bhilai', 'end': 'Ambikapur', 'departure_time': '09:45', 'driver': 'Arjun', 'truck_number': 'CG 04 8129'},
+{'start': 'Rajnandgaon', 'end': 'Balod', 'departure_time': '12:15', 'driver': 'Arjun', 'truck_number': 'CG 04 9533'},
+{'start': 'Dhamtari', 'end': 'Bhatapara', 'departure_time': '14:30', 'driver': 'Prince', 'truck_number': 'CG 04 8624'},
+{'start': 'Mahasamund', 'end': 'Mungeli', 'departure_time': '16:00', 'driver': 'Rahul', 'truck_number': 'CG 04 9121'},
+{'start': 'Balod', 'end': 'Kanker', 'departure_time': '17:45', 'driver': 'Arjun', 'truck_number': 'CG 04 9874'},
+{'start': 'Bhatapara', 'end': 'Raipur', 'departure_time': '19:30', 'driver': 'Abhishek', 'truck_number': 'CG 04 3786'},
+{'start': 'Mungeli', 'end': 'Jagdalpur', 'departure_time': '21:15', 'driver': 'Amit', 'truck_number': 'CG 04 6460'},
+{'start': 'Kanker', 'end': 'Durg', 'departure_time': '10:45', 'driver': 'Sonu', 'truck_number': 'CG 04 7630'},
+{'start': 'Raipur', 'end': 'Ambikapur', 'departure_time': '12:30', 'driver': 'Vikram', 'truck_number': 'CG 04 2012'}
+]
+
+def find_matching_truck(start, end, time):
+    time_format = '%H:%M'
+
+    input_time = datetime.strptime(time, time_format)
+
+    for truck in current_running_trucks:
+        truck_start_time = datetime.strptime(truck['departure_time'], time_format)
+
+        time_window_start = truck_start_time - timedelta(hours=2)
+        time_window_end = truck_start_time + timedelta(hours=2)
+
+        if time_window_start <= input_time <= time_window_end:
+            return truck
+
+    return None
+
+def calculate_pooling(start, end, time):
+    matching_truck = find_matching_truck(start, end, time)
+    if matching_truck:
+        check = (
+            "Truck number: "+matching_truck['truck_number'] +
+            '<br><br>From city: ' + start +
+            '<br><br>To: ' + end +
+            '<br><br>Time: ' + time +
+            '<br><br>With driver: ' + matching_truck['driver']
+        )
+        return f"<h3>Pooling is available<h3> <br><br>{check}"
+    else:
+        return "No truck available for pooling right now"
+
+
+
+
+@app.route('/pool', methods=['GET', 'POST'])
+def pool():
+    if request.method == 'POST':
+        # Get start, end, and time from the form
+        start_node = request.form['start_node']
+        end_node = request.form['end_node']
+        departure_time = request.form['departure_time']
+
+        # Perform pooling calculation
+        pooling_result = calculate_pooling(start_node, end_node, departure_time)
+
+        return render_template('pool.html', cities=cities_in_chhattisgarh.keys(), result=pooling_result)
+
+    return render_template('pool.html', cities=cities_in_chhattisgarh.keys(), result=None)
 
 
 if __name__ == '__main__':
