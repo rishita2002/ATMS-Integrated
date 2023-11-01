@@ -122,6 +122,7 @@
             color: white;
             text-align: center;
             padding: 20px 0;
+            width: 100%;
         }
 
         .form-field label {
@@ -164,11 +165,13 @@
                     <li><a href="/route">Optimized Routes</a></li>
                     <li><a href="/analytics">Analytics & Visualization</a></li>
                     <li><a href="/track">Real-Time Tracking</a></li>
+                    <li><a href="/pool">Pooling</a></li>
                 </ul>
             </div>
             <div class="content">
                 <div class="container">
                     <h2 style="color: #26648e;">Upload New Data</h2>
+                    <form action="/upload" method="post">
                     <div class="form-container">
                         <div class="form-field">
                             <label for="product-name">Product Name:</label>
