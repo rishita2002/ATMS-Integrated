@@ -10,5 +10,7 @@ Key Features:
 
 Route Optimization: Our ATMS provides advanced route optimization capabilities to minimize transportation costs and delivery times while considering real-time factors like traffic and weather conditions.
 Real-time taking: Stakeholder gets all the real-time information about product in email.
-
+Inventory: Contains all the information about Available product.
+Analytics and reporting: Provides all the information through visualization.
+Compliance: Contains information about warehouses and items stored in it.
 Environmental Considerations: The system factors in environmental conditions to support eco-friendly transportation decisions.
