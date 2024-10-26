@@ -20,10 +20,6 @@ Compliance: Contains information about warehouses and items stored in it.
 
 Environmental Considerations: The system factors in environmental conditions to support eco-friendly transportation decisions.
 
-# ATMOS
-## Advanced Transportation Management and Operation System
-Development of a tailored Advanced Transportation and Management System for agri-food supply chain management.
-
 ## Table of Contents
 - [Goals](#Goals)
 - [Components](#Components)
